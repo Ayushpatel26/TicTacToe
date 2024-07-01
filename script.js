@@ -3,7 +3,8 @@ console.log("js");
 let player = "O";
 let turn = true;
 let isGameOver = false;
-let draw = 0;//Variable for checking draw
+//Variable for checking draw
+let draw = 0;
 // for sound when clicked
 let music = new Audio("beep.mp3")
 
@@ -17,9 +18,7 @@ boxes.forEach(dibba => {
             document.getElementById(`${clickedId}`).innerText = player;
             // clickedId.innerText = player;//not works
             music.play();
-
             checkWin();
-            draw++;
             turn = !turn;
             turn ? player = "O" : player = "X";
             if (!isGameOver) {
@@ -31,6 +30,7 @@ boxes.forEach(dibba => {
 
 // Logic for the winner
 function checkWin() {
+    draw++;         
     let boxes = document.querySelectorAll(".box");
     let wins = [[0, 1, 2, 0, 5, 0, 0, 10],
     [3, 4, 5, 0, 15, 0, 0, 30],
@@ -56,6 +56,7 @@ function checkWin() {
         }
     })
     if (draw == 9) {
+        isGameOver = true;
         document.querySelector(".status").innerHTML = "Match Draw!";
     }
 }
